@@ -20,6 +20,11 @@ $(document).ready(function() {
         }
     });
 
+    $('body').on('input', '.form-input textarea', function() {
+        this.style.height = '252px';
+        this.style.height = (this.scrollHeight) + 'px';
+    });
+
     $('body').on('change', '.form-file input', function() {
         var curInput = $(this);
         var curField = curInput.parents().filter('.form-file');
@@ -174,6 +179,35 @@ $(document).ready(function() {
         }
     });
 
+    $('body').on('click', '.press-details-item-video-link', function(e) {
+        $('.press-details-item-video.start').removeClass('start');
+        $('.press-details-item-video-player').html('');
+        $(this).parent().parent().addClass('start');
+        $(this).parent().parent().find('.press-details-item-video-player').html('<iframe width="560" height="315" src="' + $(this).attr('href') + '?rel=0&autoplay=1" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
+        e.preventDefault();
+    });
+
+    $('body').on('click', '.press-edit-video-add a', function(e) {
+        var curID = $('.press-edit-video-add a').data('curID');
+        if (curID === undefined) {
+            curID = -1;
+        }
+        curID++;
+        $('.press-edit-video-add a').data('curID', 0);
+        var hewHTML = $('.press-edit-video-item-template').html();
+        hewHTML = hewHTML.replace(/_ID_/g, 'new_' + curID)
+        $('.press-edit-video-list').append(hewHTML);
+        e.preventDefault();
+    });
+
+    $('body').on('click', '.press-details-video-link', function(e) {
+        $('.press-details-video.start').removeClass('start');
+        $('.press-details-video-player').html('');
+        $(this).parent().addClass('start');
+        $(this).parent().find('.press-details-video-player').html('<iframe width="560" height="315" src="' + $(this).attr('href') + '?rel=0&autoplay=1" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
+        e.preventDefault();
+    });
+
 });
 
 function filterUpdate() {
@@ -234,10 +268,6 @@ function initForm(curForm) {
 
     curForm.find('.form-input textarea').each(function() {
         $(this).css({'height': this.scrollHeight, 'overflow-y': 'hidden'});
-        $(this).on('input', function() {
-            this.style.height = '99px';
-            this.style.height = (this.scrollHeight) + 'px';
-        });
     });
 
     curForm.find('.form-input-date input').mask('00.00.0000');

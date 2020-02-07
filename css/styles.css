@@ -88,7 +88,7 @@ fieldset .form-label {margin:0 0 14px 0}
 .form-input textarea {position:relative; border:1px solid #d9d9d9; font:16px/24px Arial, sans-serif; color:#000; vertical-align:top; margin:0; padding:24px 19px 10px 19px; width:100%; height:60px; box-sizing:border-box; outline:none; border-radius:1px; background:#fff; -webkit-appearance:none; transition:border-color 0.2s}
 .fonts-loaded .form-input input,
 .fonts-loaded .form-input textarea {font-family:Lato, sans-serif}
-.form-input textarea {height:99px; resize:none; overflow:auto; padding-top:51px; padding-bottom:22px; font-weight:300}
+.form-input textarea {height:252px; resize:none; overflow:auto; padding-top:51px; padding-bottom:22px; font-weight:300}
 .form-input input.error,
 .form-input textarea.error {border-color:#f00}
 label.error {display:block; font-size:13px; line-height:19px; color:#df0e0e; margin:8px 0 0 0; font-weight:normal}
@@ -143,6 +143,23 @@ label.error {display:block; font-size:13px; line-height:19px; color:#df0e0e; mar
 .form-file-input:hover span {border-color:#5f94d0}
 .form-file-input label.error {display:block; position:absolute; left:0; bottom:0; font-size:12px; line-height:18px; font-weight:normal; color:#f00}
 .form-file-name {margin:0 0 0 254px; line-height:40px; color:#181818}
+
+.form-file-ajax {margin:20px 0}
+.form-file-ajax::after {content:""; display:block; clear:both}
+.form-file-ajax-input {float:left; width:234px; position:relative; overflow:hidden; cursor:pointer}
+.form-file-ajax-input span {display:block; height:40px; font-size:16px; line-height:38px; background:#fff; border:1px solid #fff; padding:0 0 0 12px; font-weight:normal; transition:all 0.2s; color:#808080}
+.form-file-ajax-input span::before {content:""; display:block; position:absolute; right:13px; top:13px; width:13px; height:13px; background:url(../images/file.svg) no-repeat}
+.form-file-ajax-input input {height:200px; z-index:1; position:absolute; top:0; right:0; opacity:0; cursor:pointer; font-size:200px; background:url(../images/blank.gif); -webkit-appearance:none}
+.form-file-ajax-input input.error+span {margin-bottom:28px}
+.form-file-ajax-input input.error+label.error+span {margin-bottom:28px}
+.form-file-ajax-input:hover span {border-color:#5f94d0}
+.form-file-ajax-input label.error {display:block; position:absolute; left:0; bottom:0; font-size:12px; line-height:18px; font-weight:normal; color:#f00}
+
+.form-files-list {margin:6px 0 0 -14px; font-size:0; line-height:0; letter-spacing:-1px}
+.form-files-list-item-progress {display:inline-block; vertical-align:top; width:89px; height:70px; background:rgba(0, 0, 0, 0.5) url(../images/loading-file.gif) no-repeat center; background-size:32px; border-radius:3px; margin:14px 0 0 14px; position:relative}
+.form-files-list-item {display:inline-block; vertical-align:top; width:89px; height:70px; background:no-repeat center; background-size:cover; border-radius:3px; margin:14px 0 0 14px; position:relative}
+.form-files-list-item-remove {display:block; position:absolute; right:4px; top:4px; width:20px; height:20px; background:#fff url(../images/form-files-list-item-remove.svg) no-repeat center; border:1px solid #efefef; cursor:pointer; border-radius:50%}
+.form-files-list-item-remove:hover {border-color:#000}
 
 .form-policy {margin:30px 0 52px 0; font-weight:300}
 .form-policy a {color:#454545; text-decoration:underline}
@@ -285,6 +302,16 @@ header::after {content:""; display:block; clear:both}
 .item-add:hover {background-color:#5f94d0}
 .item-add:active {background-color:#36669d}
 
+.item-edit {display:inline-block; vertical-align:middle; width:37px; height:37px; background:#5181b8 url(../images/item-edit.svg) no-repeat center; border-radius:50%; margin:-2px 0 0 10px}
+.item-edit:hover {background-color:#5f94d0}
+.item-edit:active {background-color:#36669d}
+
+.back-link {display:inline-block; vertical-align:middle; margin:-2px 10px 0 0}
+.back-link svg {display:block}
+.back-link path {stroke:#5181b8; transition:all 0.2s}
+.back-link:hover path {stroke:#5f94d0}
+.back-link:active path {stroke:#36669d}
+
 .press-ctrl {margin:29px 0 0 0; background:#fff; height:76px; border-radius:2px; padding:0 29px 0 20px; box-shadow:0px 2px 4px rgba(51, 51, 51, 0.1); position:relative}
 .press-ctrl::after {content:""; display:block; clear:both}
 
@@ -361,6 +388,9 @@ header::after {content:""; display:block; clear:both}
 .press-item-media-count-unit {font-size:13px; line-height:14px; letter-spacing:0; color:#333}
 .press-item-media-preview-video::after {content:""; display:block; position:absolute; left:50%; top:50%; width:20px; height:24px; margin:-12px 0 0 -10px; background:url(../images/press-item-media-preview-video.svg) no-repeat}
 
+.press-item-media-video {width:81px}
+.press-item-media-video .press-item-media-preview-video::after {width:20px; height:20px; margin:-10px 0 0 -10px; background:rgba(0, 0, 0, 0.56) url(../images/press-item-media-preview-video-2.svg) no-repeat 8px center; border-radius:50%}
+
 .press-item-menu {display:table-cell; vertical-align:top; width:50px; padding:15px 0}
 .press-item-menu-container {position:relative; width:50px}
 .press-item-menu-icon {width:50px; height:50px; background:url(../images/press-item-menu-icon.svg) no-repeat center; transition:all 0.2s; border-radius:50%}
@@ -373,6 +403,58 @@ header::after {content:""; display:block; clear:both}
 .press-item-menu-list ul li a {display:block; padding:0 27px 0 49px; position:relative; color:#404040}
 .press-item-menu-list ul li a:hover {background:#f1f4f7}
 .press-item-menu-list ul li a span {display:block; position:absolute; left:9px; width:40px; top:50%; transform:translateY(-50%); text-align:center; line-height:0}
+
+.press-center-link {margin:30px 0 0 0}
+.press-center-link a {display:inline-block; vertical-align:top; height:36px; background:rgba(255, 255, 255, 0.55); border:1px solid rgba(208, 208, 208, 0.55); border-radius:2px; font-weight:normal; font-size:14px; line-height:34px; padding:0 11px; color:#000}
+.press-center-link a:hover {color:#5f94d0; border-color:#5f94d0}
+.press-center-link a::before {content:""; display:inline-block; vertical-align:middle; margin:-2px 6px 0 0; width:12px; height:12px; background:url(../images/press-center-link.svg) no-repeat}
+
+.press-details {margin:38px -10px 0 -10px}
+.press-details-item {display:table; width:100%; border-spacing:10px 0; border-collapse:separate; margin:10px 0}
+.press-details-item-title {display:table-cell; vertical-align:top; background:#fff; width:323px; padding:18px 20px; color:#808080; font-weight:normal}
+.press-details-item-value {display:table-cell; vertical-align:top; background:#fff; padding:18px 26px; font-weight:normal}
+.press-details-item-value > *:first-child {margin-top:0}
+.press-details-item-value > *:last-child {margin-bottom:0}
+.press-details-item-big {display:block; width:auto; margin:10px; background:#fff; padding:18px 20px 36px 18px}
+.press-details-item-big .press-details-item-title {display:block; background:none; padding:0; width:auto}
+.press-details-item-big .press-details-item-value {display:block; background:none; padding:14px 0 0 0}
+
+.press-details-item-photos {font-size:0; line-height:0; letter-spacing:-1px; margin:0 0 -10px -20px}
+.press-details-item-photo {display:inline-block; vertical-align:top; height:128px; margin:10px 0 10px 20px}
+.press-details-item-photo img {display:block; height:128px; border-radius:3px}
+
+.press-details-item-videos {font-size:0; line-height:0; letter-spacing:-1px; margin:0 0 -10px -20px}
+.press-details-item-video {display:inline-block; vertical-align:top; width:33.33%; padding:10px 0 10px 20px}
+.press-details-item-video-inner {position:relative; height:228px}
+.press-details-item-video-link {display:block; position:absolute; left:0; top:0; right:0; bottom:0; background:no-repeat center; background-size:cover; border-radius:3px}
+.press-details-item-video.start .press-details-item-video-link {display:none}
+.press-details-item-video-link::after {content:""; display:block; position:absolute; left:50%; top:50%; width:42px; height:42px; background:rgba(0, 0, 0, 0.56) url(../images/press-video-play.svg) no-repeat 16px center; margin:-21px 0 0 -21px; border-radius:50%; transition:all 0.2s}
+.press-details-item-video-link:hover::after {background-color:#000}
+.press-details-item-video-player {display:none; position:absolute; left:0; top:0; right:0; bottom:0}
+.press-details-item-video.start .press-details-item-video-player {display:block}
+.press-details-item-video-player iframe {position:absolute; left:0; top:0; width:100%; height:100%}
+
+.press-edit-video-item {margin:40px 0 0 0; padding:40px 0 0 0; border-top:1px solid rgba(196, 196, 196, 0.5)}
+.press-edit-video-item:first-child {margin:0; padding:0; border-top:none}
+
+.press-edit-video-add {margin:20px 0 0 0}
+.press-edit-video-add a {text-decoration:none}
+.press-edit-video-add span {border-bottom:1px dotted #5181b8; transition:all 0.2s}
+.press-edit-video-add a:hover span {border-bottom-color:transparent}
+.press-edit-video-add svg {display:inline-block; vertical-align:middle; margin:-4px 5px 0 0}
+.press-edit-video-add path {fill:#5181b8; transition:all 0.2s}
+.press-edit-video-add a:hover path {fill:#5f94d0}
+
+.press-edit-video-item-template {display:none}
+
+.press-details-video {position:relative; margin:40px 10px; max-width:550px; height:330px}
+.press-details-video-link {display:block; position:absolute; left:0; top:0; right:0; bottom:0; background:no-repeat center; background-size:cover; border-radius:3px}
+.press-details-video.start .press-details-video-link {display:none}
+.press-details-video-link::after {content:""; display:block; position:absolute; left:50%; top:50%; width:62px; height:62px; background:rgba(0, 0, 0, 0.56) url(../images/video-play.svg) no-repeat 24px center; margin:-31px 0 0 -31px; border-radius:50%; transition:all 0.2s}
+.press-details-video-link:hover::after {background-color:#000}
+.press-details-video-player {display:none; position:absolute; left:0; top:0; right:0; bottom:0}
+.press-details-video.start .press-details-video-player {display:block}
+.press-details-video-player iframe {position:absolute; left:0; top:0; width:100%; height:100%}
 
 footer {height:93px; position:relative; margin:-93px 0 0 99px; background:#e9f5fa; font-size:14px; line-height:21px}
 footer .container {position:relative}
