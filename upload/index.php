@@ -11,7 +11,7 @@
             }
 
             if (move_uploaded_file($value['tmp_name'][0], 'files/'.$value['name'][0])) {
-                echo '{"status":"success", "path":"' . 'upload/files/'.$value['name'][0] . '"}';
+                echo '{"status":"success", "path":"' . $value['name'][0] . '"}';
                 exit;
             }
         }

@@ -52,7 +52,9 @@ blockquote::before {content:""; display:block; width:58px; height:49px; position
 .window form {margin:33px 0 40px 0; padding:0}
 
 .wrapper fieldset,
-.window fieldset {margin:20px 0; padding:24px 30px 14px 30px; background:#fff; border:none}
+.window fieldset {margin:20px 0; padding:30px; background:#fff; border:none}
+fieldset > *:first-child {margin-top:0}
+fieldset > *:last-child {margin-bottom:0}
 
 legend {display:none}
 
@@ -76,6 +78,7 @@ legend {display:none}
 
 .form-label {margin:40px 0 20px 0; font-weight:normal}
 fieldset .form-label {margin:0 0 14px 0}
+.lk-form fieldset h3 {margin:0 0 14px 0}
 
 .form-input {position:relative; margin:10px 0}
 .form-input span {position:absolute; left:19px; top:17px; font-size:16px; line-height:24px; font-weight:normal; color:#808080; transition:all 0.2s; z-index:1; pointer-events:none}
@@ -135,7 +138,7 @@ label.error {display:block; font-size:13px; line-height:19px; color:#df0e0e; mar
 .form-file {margin:20px 0}
 .form-file::after {content:""; display:block; clear:both}
 .form-file-input {float:left; width:234px; position:relative; overflow:hidden; cursor:pointer}
-.form-file-input span {display:block; height:40px; font-size:16px; line-height:38px; background:#fff; border:1px solid #fff; padding:0 0 0 12px; font-weight:normal; transition:all 0.2s; color:#808080}
+.form-file-input span {display:block; height:40px; font-size:16px; line-height:38px; background:#fff; border:1px solid #d9d9d9; padding:0 0 0 12px; font-weight:normal; transition:all 0.2s; color:#808080}
 .form-file-input span::before {content:""; display:block; position:absolute; right:13px; top:13px; width:13px; height:13px; background:url(../images/file.svg) no-repeat}
 .form-file-input input {height:200px; z-index:1; position:absolute; top:0; right:0; opacity:0; cursor:pointer; font-size:200px; background:url(../images/blank.gif); -webkit-appearance:none}
 .form-file-input input.error+span {margin-bottom:28px}
@@ -147,7 +150,7 @@ label.error {display:block; font-size:13px; line-height:19px; color:#df0e0e; mar
 .form-file-ajax {margin:20px 0}
 .form-file-ajax::after {content:""; display:block; clear:both}
 .form-file-ajax-input {float:left; width:234px; position:relative; overflow:hidden; cursor:pointer}
-.form-file-ajax-input span {display:block; height:40px; font-size:16px; line-height:38px; background:#fff; border:1px solid #fff; padding:0 0 0 12px; font-weight:normal; transition:all 0.2s; color:#808080}
+.form-file-ajax-input span {display:block; height:40px; font-size:16px; line-height:38px; background:#fff; border:1px solid #d9d9d9; padding:0 0 0 12px; font-weight:normal; transition:all 0.2s; color:#808080}
 .form-file-ajax-input span::before {content:""; display:block; position:absolute; right:13px; top:13px; width:13px; height:13px; background:url(../images/file.svg) no-repeat}
 .form-file-ajax-input input {height:200px; z-index:1; position:absolute; top:0; right:0; opacity:0; cursor:pointer; font-size:200px; background:url(../images/blank.gif); -webkit-appearance:none}
 .form-file-ajax-input input.error+span {margin-bottom:28px}
@@ -155,11 +158,13 @@ label.error {display:block; font-size:13px; line-height:19px; color:#df0e0e; mar
 .form-file-ajax-input:hover span {border-color:#5f94d0}
 .form-file-ajax-input label.error {display:block; position:absolute; left:0; bottom:0; font-size:12px; line-height:18px; font-weight:normal; color:#f00}
 
-.form-files-list {margin:6px 0 0 -14px; font-size:0; line-height:0; letter-spacing:-1px}
+.form-files-list {margin:-14px 0 0 -14px; font-size:0; line-height:0; letter-spacing:-1px}
 .form-files-list-item-progress {display:inline-block; vertical-align:top; width:89px; height:70px; background:rgba(0, 0, 0, 0.5) url(../images/loading-file.gif) no-repeat center; background-size:32px; border-radius:3px; margin:14px 0 0 14px; position:relative}
 .form-files-list-item {display:inline-block; vertical-align:top; width:89px; height:70px; background:no-repeat center; background-size:cover; border-radius:3px; margin:14px 0 0 14px; position:relative}
-.form-files-list-item-remove {display:block; position:absolute; right:4px; top:4px; width:20px; height:20px; background:#fff url(../images/form-files-list-item-remove.svg) no-repeat center; border:1px solid #efefef; cursor:pointer; border-radius:50%}
-.form-files-list-item-remove:hover {border-color:#000}
+.form-files-list-item-remove,
+.form-files-list-item-cancel {display:block; position:absolute; right:4px; top:4px; width:20px; height:20px; background:#fff url(../images/form-files-list-item-remove.svg) no-repeat center; border:1px solid #efefef; cursor:pointer; border-radius:50%}
+.form-files-list-item-remove:hover,
+.form-files-list-item-cancel:hover {border-color:#000}
 
 .form-policy {margin:30px 0 52px 0; font-weight:300}
 .form-policy a {color:#454545; text-decoration:underline}
@@ -180,6 +185,10 @@ label.error {display:block; font-size:13px; line-height:19px; color:#df0e0e; mar
 
 .container {padding:0 60px}
 .container::after {content:""; display:block; clear:both}
+
+.block {margin:20px 0; padding:35px 50px; border-radius:1px; background:#fff}
+.block > *:first-child {margin-top:0}
+.block > *:last-child {margin-bottom:0}
 
 .pager {margin:50px 0 0 0; font-size:0; line-height:0; letter-spacing:-1px}
 .pager a,
@@ -264,7 +273,6 @@ header::after {content:""; display:block; clear:both}
 .dashboard-item-add .dashboard-item-title {font-size:16px; line-height:24px; font-weight:normal; height:auto; margin:17px 0 0 0}
 
 .lk-form {max-width:754px}
-.lk-form h3 {margin:29px 0 13px 0}
 .lk-form h3+.form-input,
 .lk-form h3+.form-file {margin-top:13px}
 
@@ -280,6 +288,20 @@ header::after {content:""; display:block; clear:both}
 .company-logo-inner img {display:block}
 .company-logo-inner a {display:block; position:absolute; right:2px; top:2px; width:20px; height:20px; background:#fff url(../images/company-logo-delete.svg) no-repeat center; border:1px solid #efefef; border-radius:50%}
 .company-logo-inner a:hover {border-color:#000}
+
+.company-colors {margin:-14px 0 0 -14px}
+.company-colors::after {content:""; display:block; clear:both}
+.company-color {float:left; margin:14px 0 0 14px}
+.company-color label {display:block; cursor:pointer}
+.company-color input {display:none}
+.company-color span {display:block; width:34px; height:34px; border-radius:1px; position:relative}
+.company-color span::after {content:""; display:block; width:16px; height:16px; position:absolute; left:50%; top:50%; margin:-8px 0 0 -8px; border:1px solid #c2c2c2; background:#fff url(../images/checkbox.svg) no-repeat -999px -999px; opacity:0; transition:opacity 0.2s}
+.company-color span.company-color-1 {background:#f6db49}
+.company-color span.company-color-2 {background:#7270ef}
+.company-color span.company-color-3 {background:#57f479}
+.company-color span.company-color-4 {background:#ef70a5}
+.company-color label:hover span::after {opacity:1}
+.company-color input:checked+span::after {background-position:center; opacity:1}
 
 .tabs-menu {margin:39px 0 0 0}
 .tabs-menu ul {margin:0; padding:0; list-style:none; font-size:18px; line-height:27px; border-bottom:2px solid #dadada}
@@ -315,16 +337,16 @@ header::after {content:""; display:block; clear:both}
 .press-ctrl {margin:29px 0 0 0; background:#fff; height:76px; border-radius:2px; padding:0 29px 0 20px; box-shadow:0px 2px 4px rgba(51, 51, 51, 0.1); position:relative}
 .press-ctrl::after {content:""; display:block; clear:both}
 
-.press-filter {float:left; max-width:calc(100% - 47px); padding:20px 0 0 0}
+.press-filter {float:left; max-width:calc(100% - 300px); padding:20px 0 0 0}
 .press-filter-link {float:left; width:117px; height:36px; border:1px solid rgba(208, 208, 208, 0.55); text-align:center; border-radius:2px; font-size:14px; color:#000; font-weight:normal; line-height:34px; cursor:pointer}
 .press-filter-link:hover {color:#5f94d0; border-color:#5f94d0}
 .press-filter-link::before {content:""; display:inline-block; vertical-align:middle; width:12px; height:11px; background:url(../images/press-filter.svg) no-repeat; margin:-2px 10px 0 0}
-.press-filter-params {float:left; margin:3px 0 0 10px; max-width:calc(100% - 127px); position:relative; overflow:hidden; white-space:nowrap; font-size:0; line-height:0; letter-spacing:-1px}
-.press-filter-param {display:inline-block; vertical-align:top; position:relative; margin:0 0 0 10px; height:30px; background:#f3f3f3; border-radius:15px; padding:0 32px 0 15px; color:#404040; font-weight:normal; font-size:13px; line-height:32px; letter-spacing:0}
-.press-filter-param span {display:block; position:absolute; right:0; top:0; bottom:0; border-radius:0 15px 15px 0; width:22px; cursor:pointer}
-.press-filter-param svg {display:block; position:absolute; left:0; top:50%; transform:translateY(-50%)}
-.press-filter-param path {stroke:#5181b8; transition:all 0.2s}
-.press-filter-param span:hover path {stroke:#5f94d0; transition:all 0.2s}
+.press-filter-params {float:left; margin:3px 0 0 21px; max-width:calc(100% - 138px); position:relative; overflow:hidden; white-space:nowrap; font-size:0; line-height:0; letter-spacing:-1px}
+.press-filter-param {display:inline-block; vertical-align:top; position:relative; margin:0 4px 0 0; height:30px; background:#f3f3f3; border-radius:2px; padding:0 27px 0 10px; color:#404040; font-weight:normal; font-size:13px; line-height:34px; letter-spacing:0}
+.press-filter-param span {display:block; position:absolute; right:6px; top:6px; border-radius:2px; width:19px; height:19px; cursor:pointer; transition:all 0.2s}
+.press-filter-param span:hover {background:#dfdfdf}
+.press-filter-param svg {display:block; position:absolute; left:6px; top:6px}
+.press-filter-param path {stroke:#5181b8}
 
 .press-filter-params-window {display:none; position:absolute; left:0; top:100%; margin-top:-2px; width:379px; padding:31px 0 38px 31px; background:#fff; border:1px solid #eaeaea; box-shadow:0px 10px 45px rgba(38, 38, 38, 0.1); border-radius:2px; z-index:10}
 .press-fitler-open .press-filter-params-window {display:block}
@@ -351,11 +373,31 @@ header::after {content:""; display:block; clear:both}
 .form-checkbox-filter-status-2 {color:#b01f1f}
 .form-checkbox-filter-status-3 {color:#404040}
 
-.press-search {float:right; margin:29px 0 0 0}
+.press-search {float:right; margin:29px 0 0 0; position:relative}
 .press-search-link {display:block}
 .press-search-link svg {display:block}
 .press-search-link path {fill:#636363; opacity:0.8; transition:all 0.2s}
 .press-search-link:hover path {fill:#5f94d0; opacity:1}
+
+.press-search-window {position:absolute; right:0; top:-9999px; width:282px; transition:opacity 0.2s; opacity:0}
+.press-search.open .press-search-window {top:0; opacity:1}
+.wrapper .press-search-window form {margin:0; padding:0 18px 0 0; position:relative}
+.press-search-window-input input {position:relative; top:-4px; border:none; border-bottom:1px solid #c4c4c4; font:300 16px/24px Arial, sans-serif; color:#1d1d1d; vertical-align:top; margin:0; padding:0 0 6px 0; width:100%; height:31px; box-sizing:border-box; outline:none; border-radius:0; background:#fff; -webkit-appearance:none; transition:border-color 0.2s}
+.press-search-window-input input {font-family:Lato, sans-serif}
+.press-search-window-input label.error {display:none !important}
+
+@-webkit-keyframes autofill-filter {to {color:#1d1d1d; background:#fff}}
+.press-search-window-input input:-webkit-autofill {-webkit-animation-name:autofill-filter; -webkit-animation-fill-mode:both}
+
+.press-search-window-input input::-webkit-input-placeholder {opacity:1; color:#1d1d1d}
+.press-search-window-input input::-moz-placeholder {opacity:1; color:#1d1d1d}
+.press-search-window-input input:-ms-input-placeholder {opacity:1; color:#1d1d1d}
+
+.press-search-window-submit {position:absolute; right:0; top:0}
+.press-search-window-submit button {display:block; margin:0; padding:0; overflow:hidden; outline:none; vertical-align:top; width:18px; height:18px; background:transparent; border:none; border-radius:0; -webkit-appearance:none; cursor:pointer}
+.press-search-window-submit button svg {display:block}
+.press-search-window-submit button path {fill:#636363; opacity:0.8; transition:all 0.2s}
+.press-search-window-submit button:hover path {fill:#5f94d0; opacity:1}
 
 .press-container {position:relative}
 .press-container.loading::after {content:""; display:block; position:absolute; left:0; top:0; right:0; bottom:0; background:rgba(255, 255, 255, 0.5) url(../images/loading.gif) no-repeat center; z-index:2}
@@ -437,7 +479,15 @@ header::after {content:""; display:block; clear:both}
 .press-edit-video-item {margin:40px 0 0 0; padding:40px 0 0 0; border-top:1px solid rgba(196, 196, 196, 0.5)}
 .press-edit-video-item:first-child {margin:0; padding:0; border-top:none}
 
-.press-edit-video-add {margin:20px 0 0 0}
+.press-video-add h3 {position:relative}
+.press-video-add h3::before {content:""; display:block; position:absolute; left:0; top:50%; right:0; height:1px; background:#c4c4c4; opacity:0.5}
+.press-video-add h3 span {display:inline-block; vertical-align:top; position:relative; background:#fff; padding:0 22px 0 0}
+
+.press-video-add .form-file-input {width:245px}
+.press-video-add .form-file-input span {border-color:#fff}
+.press-video-add .form-file-input:hover span {border-color:#5f94d0}
+
+.press-edit-video-add {margin:40px 0 0 0; padding:20px 0 0 0; border-top:1px solid rgba(196, 196, 196, 0.5)}
 .press-edit-video-add a {text-decoration:none}
 .press-edit-video-add span {border-bottom:1px dotted #5181b8; transition:all 0.2s}
 .press-edit-video-add a:hover span {border-bottom-color:transparent}

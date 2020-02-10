@@ -79,38 +79,75 @@
 
                                 <div class="lk-form">
                                     <form action="#" method="post">
-                                        <div class="form-input"><span>Название компании <em>*</em></span><input type="text" name="name" value="" class="required" /></div>
-                                        <div class="form-input"><span>Телефон <em>*</em></span><input type="text" name="phone" value="+7 (055) 233-62-72" class="required phoneRU" /></div>
-                                        <div class="form-input"><span>Электронная почта</span><input type="text" name="email" value="kherson29a@stol-i-stul.com.ua" class="email" /></div>
-                                        <div class="form-input"><span>Адрес</span><input type="text" name="address" value="пр-т 200 лет Херсона, 29а, Херсон, Украина" /></div>
-                                        <div class="form-input"><span>Адрес для пресс-центра</span><input type="text" name="addressPress" value="" /></div>
+                                        <fieldset>
+                                            <div class="form-input"><span>Название компании <em>*</em></span><input type="text" name="name" value="" class="required" /></div>
+                                            <div class="form-input"><span>Телефон <em>*</em></span><input type="text" name="phone" value="+7 (055) 233-62-72" class="required phoneRU" /></div>
+                                            <div class="form-input"><span>Электронная почта</span><input type="text" name="email" value="kherson29a@stol-i-stul.com.ua" class="email" /></div>
+                                            <div class="form-input"><span>Адрес</span><input type="text" name="address" value="пр-т 200 лет Херсона, 29а, Херсон, Украина" /></div>
+                                            <div class="form-input"><span>Адрес для пресс-центра</span><input type="text" name="addressPress" value="" /></div>
+                                        </fieldset>
 
-                                        <h3>Логотип</h3>
-
-                                        <div class="form-file">
-                                            <div class="form-file-input"><input type="file" name="file" class="company-logo-file" /><span>Загрузить логотип</span></div>
-                                            <div class="form-file-name"></div>
-                                        </div>
-                                        <div class="company-logo">
-                                            <div class="company-logo-inner">
-                                                <img src="files/company-logo.png" alt="" />
-                                                <a href="#"></a>
+                                        <fieldset>
+                                            <h3>Логотип</h3>
+                                            <div class="form-file">
+                                                <div class="form-file-input"><input type="file" name="file" class="company-logo-file" /><span>Загрузить логотип</span></div>
+                                                <div class="form-file-name"></div>
                                             </div>
-                                        </div>
+                                            <div class="company-logo">
+                                                <div class="company-logo-inner">
+                                                    <img src="files/company-logo.png" alt="" />
+                                                    <a href="#"></a>
+                                                </div>
+                                            </div>
+                                        </fieldset>
 
-                                        <h3>Социальные сети</h3>
-                                        <div class="lk-form-social">
-                                            <div class="form-input"><img src="images/input-fb.svg" alt="" /><span>Facebook</span><input type="text" name="socialFb" value="" /></div>
-                                            <div class="form-input"><img src="images/input-vk.svg" alt="" /><span>Vk</span><input type="text" name="socialVk" value="" /></div>
-                                            <div class="form-input"><img src="images/input-tw.svg" alt="" /><span>Twitter</span><input type="text" name="socialTw" value="" /></div>
-                                            <div class="form-input"><img src="images/input-yt.svg" alt="" /><span>Youtube</span><input type="text" name="socialYt" value="" /></div>
-                                            <div class="form-input"><img src="images/input-in.svg" alt="" /><span>LinkedIn</span><input type="text" name="socialIn" value="" /></div>
-                                        </div>
+                                        <fieldset>
+                                            <h3>Цветовая схема</h3>
+                                            <div class="company-colors">
+                                                <div class="company-color">
+                                                    <label>
+                                                        <input type="radio" name="color" value="1" />
+                                                        <span class="company-color-1"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="company-color">
+                                                    <label>
+                                                        <input type="radio" name="color" value="2" />
+                                                        <span class="company-color-2"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="company-color">
+                                                    <label>
+                                                        <input type="radio" name="color" value="3" checked="checked" />
+                                                        <span class="company-color-3"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="company-color">
+                                                    <label>
+                                                        <input type="radio" name="color" value="4" />
+                                                        <span class="company-color-4"></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </fieldset>
 
-                                        <div class="form-input form-input-textarea"><span>Описание</span><textarea name="comment" cols="5" rows="3">Проект был реализован с нуля всего за 4 месяца, что является рекордом для компании-производителя «МАЙ» по скорости воплощения инновационного продукта. Титестеры разработали бленд, который сразу же получил высокие оценки у потребителей.
+                                        <fieldset>
+                                            <h3>Социальные сети</h3>
+                                            <div class="lk-form-social">
+                                                <div class="form-input"><img src="images/input-fb.svg" alt="" /><span>Facebook</span><input type="text" name="socialFb" value="" /></div>
+                                                <div class="form-input"><img src="images/input-vk.svg" alt="" /><span>Vk</span><input type="text" name="socialVk" value="" /></div>
+                                                <div class="form-input"><img src="images/input-tw.svg" alt="" /><span>Twitter</span><input type="text" name="socialTw" value="" /></div>
+                                                <div class="form-input"><img src="images/input-yt.svg" alt="" /><span>Youtube</span><input type="text" name="socialYt" value="" /></div>
+                                                <div class="form-input"><img src="images/input-in.svg" alt="" /><span>LinkedIn</span><input type="text" name="socialIn" value="" /></div>
+                                            </div>
+                                        </fieldset>
+
+                                        <fieldset>
+                                            <div class="form-input form-input-textarea"><span>Описание</span><textarea name="comment" cols="5" rows="3">Проект был реализован с нуля всего за 4 месяца, что является рекордом для компании-производителя «МАЙ» по скорости воплощения инновационного продукта. Титестеры разработали бленд, который сразу же получил высокие оценки у потребителей.
 
 Лидер бренда Ирина Ивченко отметила, что впереди у компании большие планы по развитию сегментов «Чай с травяными добавками» и «Чистый травяной чай».
 Отдельного упоминания заслуживает название саб-бренда. «Травы России» родились легко и непринужденно, ведь это название полностью отражает позиционирование бренда «Майский», его традиционные ценности, близкие людям в России. «Мы уверены, что данный саб-бренд, наряду</textarea></div>
+                                        </fieldset>
 
                                         <div class="form-ctrl">
                                             <div class="form-submit"><input type="submit" value="Сохранить" class="btn" /></div>

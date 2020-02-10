@@ -208,6 +208,18 @@ $(document).ready(function() {
         e.preventDefault();
     });
 
+    $('body').on('click', '.press-search-link', function(e) {
+        $('.press-search').addClass('open');
+        $('.press-search-window-input input').trigger('focus');
+        e.preventDefault();
+    });
+
+    $(document).click(function(e) {
+        if ($(e.target).parents().filter('.press-search').length == 0) {
+            $('.press-search').removeClass('open');
+        }
+    });
+
 });
 
 function filterUpdate() {
@@ -228,7 +240,7 @@ function filterUpdate() {
             datesText += 'по ' + $('.filter-date-to').val();
         }
         if (datesText != '') {
-            newHTML += '<div class="press-filter-param">' + datesText + '<span data-id="' + id + '"><svg width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L4.5 4.5L8 1" stroke-width="1.2"/><path d="M8 8L4.5 4.5L1 8" stroke-width="1.2"/></svg></span></div>';
+            newHTML += '<div class="press-filter-param">' + datesText + '<span data-id="' + id + '"><svg width="7" height="7" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L4.5 4.5L8 1" stroke-width="1.2"/><path d="M8 8L4.5 4.5L1 8" stroke-width="1.2"/></svg></span></div>';
         }
     }
 
@@ -237,7 +249,7 @@ function filterUpdate() {
         id++;
         curInput.attr('data-id', id);
         if (curInput.prop('checked')) {
-            newHTML += '<div class="press-filter-param">' + curInput.parent().find('span').text() + '<span data-id="' + id + '"><svg width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L4.5 4.5L8 1" stroke-width="1.2"/><path d="M8 8L4.5 4.5L1 8" stroke-width="1.2"/></svg></span></div>';
+            newHTML += '<div class="press-filter-param">' + curInput.parent().find('span').text() + '<span data-id="' + id + '"><svg width="7" height="7" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L4.5 4.5L8 1" stroke-width="1.2"/><path d="M8 8L4.5 4.5L1 8" stroke-width="1.2"/></svg></span></div>';
         }
     }
 

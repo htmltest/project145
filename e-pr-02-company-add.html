@@ -63,29 +63,36 @@
 
                     <div class="lk-form">
                         <form action="#" method="post">
-                            <div class="form-input"><span>Название компании <em>*</em></span><input type="text" name="name" value="" class="required" /></div>
-                            <div class="form-input"><span>Телефон <em>*</em></span><input type="text" name="phone" value="" class="required phoneRU" /></div>
-                            <div class="form-input"><span>Электронная почта</span><input type="text" name="email" value="" class="email" /></div>
-                            <div class="form-input"><span>Адрес</span><input type="text" name="address" value="" /></div>
-                            <div class="form-input"><span>Адрес для пресс-центра</span><input type="text" name="addressPress" value="" /></div>
+                            <fieldset>
+                                <div class="form-input"><span>Название компании <em>*</em></span><input type="text" name="name" value="" class="required" /></div>
+                                <div class="form-input"><span>Телефон <em>*</em></span><input type="text" name="phone" value="" class="required phoneRU" /></div>
+                                <div class="form-input"><span>Электронная почта</span><input type="text" name="email" value="" class="email" /></div>
+                                <div class="form-input"><span>Адрес</span><input type="text" name="address" value="" /></div>
+                                <div class="form-input"><span>Адрес для пресс-центра</span><input type="text" name="addressPress" value="" /></div>
+                            </fieldset>
 
-                            <h3>Логотип</h3>
+                            <fieldset>
+                                <h3>Логотип</h3>
+                                <div class="form-file">
+                                    <div class="form-file-input"><input type="file" name="file" class="required" class="company-logo-file" /><span>Загрузить логотип</span></div>
+                                    <div class="form-file-name"></div>
+                                </div>
+                            </fieldset>
 
-                            <div class="form-file">
-                                <div class="form-file-input"><input type="file" name="file" class="required" class="company-logo-file" /><span>Загрузить логотип</span></div>
-                                <div class="form-file-name"></div>
-                            </div>
+                            <fieldset>
+                                <h3>Социальные сети</h3>
+                                <div class="lk-form-social">
+                                    <div class="form-input"><img src="images/input-fb.svg" alt="" /><span>Facebook</span><input type="text" name="socialFb" value="" /></div>
+                                    <div class="form-input"><img src="images/input-vk.svg" alt="" /><span>Vk</span><input type="text" name="socialVk" value="" /></div>
+                                    <div class="form-input"><img src="images/input-tw.svg" alt="" /><span>Twitter</span><input type="text" name="socialTw" value="" /></div>
+                                    <div class="form-input"><img src="images/input-yt.svg" alt="" /><span>Youtube</span><input type="text" name="socialYt" value="" /></div>
+                                    <div class="form-input"><img src="images/input-in.svg" alt="" /><span>LinkedIn</span><input type="text" name="socialIn" value="" /></div>
+                                </div>
+                            </fieldset>
 
-                            <h3>Социальные сети</h3>
-                            <div class="lk-form-social">
-                                <div class="form-input"><img src="images/input-fb.svg" alt="" /><span>Facebook</span><input type="text" name="socialFb" value="" /></div>
-                                <div class="form-input"><img src="images/input-vk.svg" alt="" /><span>Vk</span><input type="text" name="socialVk" value="" /></div>
-                                <div class="form-input"><img src="images/input-tw.svg" alt="" /><span>Twitter</span><input type="text" name="socialTw" value="" /></div>
-                                <div class="form-input"><img src="images/input-yt.svg" alt="" /><span>Youtube</span><input type="text" name="socialYt" value="" /></div>
-                                <div class="form-input"><img src="images/input-in.svg" alt="" /><span>LinkedIn</span><input type="text" name="socialIn" value="" /></div>
-                            </div>
-
-                            <div class="form-input form-input-textarea"><span>Описание</span><textarea name="comment" cols="5" rows="3"></textarea></div>
+                            <fieldset>
+                                <div class="form-input form-input-textarea"><span>Описание</span><textarea name="comment" cols="5" rows="3"></textarea></div>
+                            </fieldset>
 
                             <div class="form-ctrl">
                                 <div class="form-submit"><input type="submit" value="Сохранить" class="btn" /></div>

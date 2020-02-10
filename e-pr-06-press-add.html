@@ -63,38 +63,43 @@
 
                     <div class="lk-form">
                         <form action="#" method="post">
-                            <div class="form-input"><span>Название СМИ <em>*</em></span><input type="text" name="name" value="" class="required" /></div>
 
-                            <div class="form-input"><span>Источник <em>*</em></span><input type="text" name="source" value="" class="required" /></div>
+                            <fieldset>
+                                <div class="form-input"><span>Название СМИ <em>*</em></span><input type="text" name="name" value="" class="required" /></div>
 
-                            <div class="form-input"><span>Ссылка на источник <em>*</em></span><input type="text" name="url" value="" class="url required" /></div>
+                                <div class="form-input"><span>Источник <em>*</em></span><input type="text" name="source" value="" class="required" /></div>
 
-                            <div class="form-input form-input-date"><span>Дата</span><input type="text" name="date" value="" /></div>
+                                <div class="form-input"><span>Ссылка на источник <em>*</em></span><input type="text" name="url" value="" class="url required" /></div>
 
-                            <div class="form-input form-input-textarea"><span>Анонс <em>*</em></span><textarea name="anonce" cols="5" rows="3" class="required"></textarea></div>
+                                <div class="form-input form-input-date"><span>Дата</span><input type="text" name="date" value="" /></div>
 
-                            <div class="form-file-ajax">
-                                <div class="form-file-ajax-input"><input type="file" id="fileupload" name="photos[]" data-url="upload/" /><span>Загрузить фото</span></div>
-                            </div>
+                                <div class="form-input form-input-textarea"><span>Анонс <em>*</em></span><textarea name="anonce" cols="5" rows="3" class="required"></textarea></div>
 
-                            <div class="form-files-list"></div>
-
-                            <h3>Добавления видео</h3>
-
-                            <div class="press-edit-video-list">
-
-                                <div class="press-edit-video-item">
-                                    <div class="form-input"><span>Ссылка на видео (Youtube или Vimeo)<em>*</em></span><input type="text" name="video[0][URL]" value="" class="required url" /></div>
-                                    <div class="form-input"><span>Название видео</span><input type="text" name="video[0][Names]" value="" /></div>
-                                    <div class="form-file">
-                                        <div class="form-file-input"><input type="file" name="video[0][Previews]" /><span>Загрузить обложку видео</span></div>
-                                        <div class="form-file-name"></div>
-                                    </div>
+                                <div class="form-file-ajax">
+                                    <div class="form-file-ajax-input"><input type="file" id="fileupload" name="photos[]" multiple="multiple" /><span>Загрузить фото</span></div>
                                 </div>
 
-                            </div>
+                                <div class="form-files-list"></div>
+                            </fieldset>
 
-                            <div class="press-edit-video-add"><a href="#"><svg width="12" height="13" viewBox="0 0 12 13" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11.744 7.836H6.908V12.936H5V7.836H0.188V6.06H5V0.983999H6.908V6.06H11.744V7.836Z" /></svg><span>Добавить видео</span></a></div>
+                            <fieldset class="press-video-add">
+                                <h3><span>Добавления видео</span></h3>
+
+                                <div class="press-edit-video-list">
+
+                                    <div class="press-edit-video-item">
+                                        <div class="form-input"><span>Ссылка на видео (Youtube или Vimeo)<em>*</em></span><input type="text" name="video[0][URL]" value="" class="required url" /></div>
+                                        <div class="form-input"><span>Название видео</span><input type="text" name="video[0][Names]" value="" /></div>
+                                        <div class="form-file">
+                                            <div class="form-file-input"><input type="file" name="video[0][Previews]" /><span>Загрузить обложку видео</span></div>
+                                            <div class="form-file-name"></div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="press-edit-video-add"><a href="#"><svg width="12" height="13" viewBox="0 0 12 13" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11.744 7.836H6.908V12.936H5V7.836H0.188V6.06H5V0.983999H6.908V6.06H11.744V7.836Z" /></svg><span>Добавить видео</span></a></div>
+                            </fieldset>
 
                             <div class="form-ctrl">
                                 <div class="form-submit"><input type="submit" value="Добавить" class="btn" /></div>
@@ -157,17 +162,33 @@
         <script src="js/fileupload/jquery.fileupload.js"></script>
         <script>
             $(document).ready(function() {
+                var uploadURL = 'upload/';
+                var uploadFiles = 'upload/files/';
+                var removeURL = 'upload/remove.php';
                 $('#fileupload').fileupload({
+                    url: uploadURL,
                     dataType: 'json',
                     add: function(e, data) {
-                        console.log(data);
-                        $('.form-files-list').append('<div class="form-files-list-item-progress"><span class="form-files-list-item-remove"></span></div>');
+                        $('.form-files-list').append('<div class="form-files-list-item-progress"><span class="form-files-list-item-cancel"></span></div>');
                         data.submit();
                     },
                     done: function (e, data) {
-                        $('.form-files-list-item-progress').remove();
-                        $('.form-files-list').append('<div class="form-files-list-item" style="background-image:url(' + data.result.path + ')"><span class="form-files-list-item-remove"></span></div>');
+                        $('.form-files-list-item-progress').eq(0).remove();
+                        $('.form-files-list').append('<div class="form-files-list-item" style="background-image:url(' + uploadFiles + data.result.path + ')"><a href="' + removeURL + '?file=' + data.result.path + '" class="form-files-list-item-remove"></a></div>');
                     }
+                });
+
+                $('body').on('click', '.form-files-list-item-remove', function(e) {
+                    var curLink = $(this);
+                    $.ajax({
+                        type: 'GET',
+                        url: curLink.attr('href'),
+                        dataType: 'json',
+                        cache: false
+                    }).done(function(data) {
+                        curLink.parent().remove();
+                    });
+                    e.preventDefault();
                 });
             });
         </script>
