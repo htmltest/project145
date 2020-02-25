@@ -220,6 +220,18 @@ $(document).ready(function() {
         }
     });
 
+    $('body').on('click', '.support-search-link', function(e) {
+        $('.support-search').addClass('open');
+        $('.support-search-window-input input').trigger('focus');
+        e.preventDefault();
+    });
+
+    $(document).click(function(e) {
+        if ($(e.target).parents().filter('.support-search').length == 0) {
+            $('.support-search').removeClass('open');
+        }
+    });
+
 });
 
 function filterUpdate() {
