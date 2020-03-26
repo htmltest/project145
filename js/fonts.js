@@ -19,6 +19,9 @@ if (sessionStorage.fontsLoaded) {
         var Lato400 = new FontFaceObserver('Lato', {
             weight: 'normal'
         });
+        var Lato500 = new FontFaceObserver('Lato', {
+            weight: '500'
+        });
         var Lato600 = new FontFaceObserver('Lato', {
             weight: '600'
         });
@@ -29,6 +32,7 @@ if (sessionStorage.fontsLoaded) {
         Promise.all([
             Lato300.load(),
             Lato400.load(),
+            Lato500.load(),
             Lato600.load(),
             Lato800.load()
         ]).then(function () {
