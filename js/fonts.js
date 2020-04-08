@@ -28,13 +28,17 @@ if (sessionStorage.fontsLoaded) {
         var Lato800 = new FontFaceObserver('Lato', {
             weight: '800'
         });
+        var Roboto400 = new FontFaceObserver('Roboto', {
+            weight: 'normal'
+        });
 
         Promise.all([
             Lato300.load(),
             Lato400.load(),
             Lato500.load(),
             Lato600.load(),
-            Lato800.load()
+            Lato800.load(),
+            Roboto400.load()
         ]).then(function () {
             html.classList.add('fonts-loaded');
             sessionStorage.fontsLoaded = true;
