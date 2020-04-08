@@ -698,6 +698,16 @@ $(document).ready(function() {
         e.preventDefault();
     });
 
+    $('.header-user-link').mouseover(function() {
+        if ($(window).width() >= 1200) {
+            var curDiff = $(window).width() - ($('.header-user-menu').offset().left + $('.header-user-menu').outerWidth());
+            if (curDiff < 0) {
+                $('.header-user-menu').css({'margin-left': -170 + curDiff});
+                $('.header-user-menu-arrow').css({'margin-left': -7 - curDiff});
+            }
+        }
+    });
+
     $('.header-user-link').click(function(e) {
         if ($(window).width() < 1200) {
             if ($('html').hasClass('header-user-menu-open')) {
