@@ -63,36 +63,54 @@
                             <div class="header-user-menu">
                                 <div class="header-user-menu-arrow"></div>
                                 <div class="header-user-menu-inner">
-                                    <div class="header-user-menu-name"><div class="header-user-menu-avatar"><img src="images/header-avatar.svg" alt="" /></div>Александр Летуновский</div>
-                                    <div class="header-user-menu-company">ООО "Дядя сэм"</div>
-                                    <div class="header-user-menu-list">
-                                        <ul>
-                                            <li><a href="#" class="header-user-menu-list-company">Переключить компанию</a></li>
-                                            <li><a href="#">Профиль компании</a></li>
-                                            <li><a href="#">История заказов</a></li>
-                                            <li><a href="#" class="header-user-menu-list-support">Заявки в поддержку</a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="header-user-menu-balance">
-                                        <a href="#">
-                                            <div class="header-user-menu-balance-title">Баланс</div>
-                                            <div class="header-user-menu-balance-value">23 575,00 <span class="rubl">₽</span></div>
-                                        </a>
-                                    </div>
-                                    <div class="header-user-menu-press">
-                                        <div class="header-user-menu-press-link"><a href="#">Пресс-центр</a></div>
-                                        <div class="header-user-menu-press-list">
+                                    <div class="header-user-menu-parent">
+                                        <div class="header-user-menu-name"><div class="header-user-menu-avatar"><img src="images/header-avatar.svg" alt="" /></div>Александр Летуновский</div>
+                                        <div class="header-user-menu-company">
+                                            <div class="header-user-menu-company-inner">
+                                                <div class="header-user-menu-company-logo"><img src="files/dashboard-1.png" /></div>
+                                                <div class="header-user-menu-company-title">ООО "Дядя сэм"</div>
+                                            </div>
+                                        </div>
+                                        <div class="header-user-menu-list">
                                             <ul>
-                                                <li><a href="#">Пресс-релизы</a></li>
-                                                <li><a href="#">Публикации в СМИ</a></li>
-                                                <li><a href="#">Фотогалереи</a></li>
-                                                <li><a href="#">Видеоконтент</a></li>
-                                                <li><a href="#">Спикеры</a></li>
+                                                <li><a href="#" class="header-user-menu-list-company">Переключить компанию</a></li>
+                                                <li><a href="#">Профиль компании</a></li>
+                                                <li><a href="#">История заказов</a></li>
+                                                <li><a href="#" class="header-user-menu-list-support">Заявки в поддержку</a></li>
                                             </ul>
                                         </div>
+                                        <div class="header-user-menu-balance">
+                                            <a href="#">
+                                                <div class="header-user-menu-balance-title">Баланс</div>
+                                                <div class="header-user-menu-balance-value">23 575,00 <span class="rubl">₽</span></div>
+                                            </a>
+                                        </div>
+                                        <div class="header-user-menu-press">
+                                            <div class="header-user-menu-press-link"><a href="#">Пресс-центр</a></div>
+                                            <div class="header-user-menu-press-list">
+                                                <ul>
+                                                    <li><a href="#">Пресс-релизы</a></li>
+                                                    <li><a href="#">Публикации в СМИ</a></li>
+                                                    <li><a href="#">Фотогалереи</a></li>
+                                                    <li><a href="#">Видеоконтент</a></li>
+                                                    <li class="active"><a href="#">Спикеры</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="header-user-menu-child">
+                                        <div class="header-user-menu-company-back"><a href="#">Смена компании</a></div>
+                                        <div class="header-user-menu-company-list">
+                                            <ul>
+                                                <li class="active"><a href="#"><span><img src="files/dashboard-1.png" alt="" /></span>ООО "Дядя сэм"</a></li>
+                                                <li><a href="#"><span><img src="files/dashboard-2.png" alt="" /></span>ООО «Херсонская строительная компания»</a></li>
+                                                <li><a href="#"><span><img src="files/dashboard-3.png" alt="" /></span>ООО «Стол и стул»</a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="header-user-menu-company-add"><a href="#">Добавить компанию</a></div>
                                     </div>
                                     <div class="header-user-menu-logout">
-                                        <a href="#">Выход</a>
+                                        <a href="#">Выйти</a>
                                     </div>
                                 </div>
                                 <a href="#" class="header-user-menu-close"></a>
@@ -103,22 +121,70 @@
 
                     <h1>Профиль</h1>
 
-                    <div class="lk-form">
-                        <form action="#" method="post">
-                            <fieldset>
-                                <div class="form-input"><span>Фамилия <em>*</em></span><input type="text" name="lastname" value="" class="required" /></div>
-                                <div class="form-input"><span>Имя <em>*</em></span><input type="text" name="firstname" value="Дмитрий" class="required" /></div>
-                                <div class="form-input"><span>Отчество</span><input type="text" name="firstname" value="" /></div>
-                                <div class="form-input"><span>Электронная почта <em>*</em></span><input type="text" name="email" value="" class="required email" /></div>
-                                <div class="form-input form-input-password"><span>Пароль <em>*</em></span><input type="password" name="password" value="*************" /><a href="#">Сменить пароль</a></div>
-                                <div class="form-input"><span>Телефон <em>*</em></span><input type="text" name="phone" value="" class="required phoneRU" /></div>
-                            </fieldset>
+                    <!-- tabs -->
+                    <div class="tabs">
 
-                            <div class="form-ctrl">
-                                <div class="form-submit"><input type="submit" value="Сохранить" class="btn" /></div>
+                        <div class="tabs-menu">
+                            <ul>
+                                <li class="active"><a href="#">Профиль</a></li>
+                                <li><a href="#">Пресс-центр</a></li>
+                            </ul>
+                        </div>
+
+                        <!-- tabs container -->
+                        <div class="tabs-container">
+
+                            <!-- tabs content -->
+                            <div class="tabs-content active">
+                                <div class="lk-form">
+                                    <form action="#" method="post">
+                                        <fieldset>
+                                            <div class="form-input"><span>Фамилия <em>*</em></span><input type="text" name="lastname" value="" class="required" /></div>
+                                            <div class="form-input"><span>Имя <em>*</em></span><input type="text" name="firstname" value="Дмитрий" class="required" /></div>
+                                            <div class="form-input"><span>Отчество</span><input type="text" name="firstname" value="" /></div>
+                                            <div class="form-input"><span>Электронная почта <em>*</em></span><input type="text" name="email" value="" class="required email" /></div>
+                                            <div class="form-input form-input-password"><span>Пароль <em>*</em></span><input type="password" name="password" value="*************" /><a href="#">Сменить пароль</a></div>
+                                            <div class="form-input"><span>Телефон <em>*</em></span><input type="text" name="phone" value="" class="required phoneRU" /></div>
+                                        </fieldset>
+
+                                        <div class="form-ctrl">
+                                            <div class="form-submit"><input type="submit" value="Сохранить" class="btn" /></div>
+                                        </div>
+                                    </form>
+                                </div>
+
                             </div>
-                        </form>
+                            <!-- tabs content END -->
+
+                            <!-- tabs content -->
+                            <div class="tabs-content">
+
+                                <div class="lk-form">
+                                    <form action="#" method="post">
+                                        <fieldset>
+                                            <h3>Отправка уведомлений</h3>
+                                            <div class="form-checkbox">
+                                                <label><input type="checkbox" name="notification1" checked="checked" /><span>Об изменении статусов заказов</span></label>
+                                            </div>
+                                            <div class="form-checkbox">
+                                                <label><input type="checkbox" name="notification2" /><span>Об ответах из технической поддержки</span></label>
+                                            </div>
+                                        </fieldset>
+
+                                        <div class="form-ctrl">
+                                            <div class="form-submit"><input type="submit" value="Сохранить" class="btn" /></div>
+                                        </div>
+                                    </form>
+                                </div>
+
+                            </div>
+                            <!-- tabs content END -->
+
+                        </div>
+                        <!-- tabs container END -->
+
                     </div>
+                    <!-- tabs END -->
 
                 </div>
                 <!-- container END -->
@@ -131,7 +197,7 @@
             <div class="container">
                 <div class="footer-left">
                     <div class="footer-logo"><img src="images/footer-logo.png" alt="" /></div>
-                    <div class="copyrights">Компания «ePR»® — онлайн PR-центр компании. <span>© 2019—2020</span></div>
+                    <div class="copyrights">Компания e-PR - ваш онлайн пресс-центр <span>© 2019—2020</span></div>
                 </div>
                 <div class="footer-menu">
                     <ul>

@@ -45,6 +45,12 @@
           justify-content: center;
   height: 32px;
   z-index: 1; }
+  
+  @media screen and (max-width:1199px) {
+    .datepicker--cell {
+        height: 40px;
+    }
+  }
   .datepicker--cell.-focus- {
     background: #f0f0f0; }
   .datepicker--cell.-current- {
@@ -185,6 +191,9 @@
   transition: opacity 0.3s ease, transform 0.3s ease, left 0s 0.3s;
   transition: opacity 0.3s ease, transform 0.3s ease, left 0s 0.3s, -webkit-transform 0.3s ease;
   z-index: 100; }
+@media screen and (max-width:1199px) {
+    .datepicker {font-size:20px; width:400px; line-height:30px}
+}
   .datepicker.-from-top- {
     -webkit-transform: translateY(-8px);
             transform: translateY(-8px); }

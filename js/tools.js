@@ -209,8 +209,8 @@ $(document).ready(function() {
     });
 
     $('body').on('click', '.press-search-link', function(e) {
-        $('.press-search').toggleClass('open');
-        if ($('.press-search').hasClass('open')) {
+        $('html').toggleClass('press-search-open');
+        if ($('html').hasClass('press-search-open')) {
             $('.press-search-window-input input').trigger('focus');
         }
         e.preventDefault();
@@ -218,7 +218,7 @@ $(document).ready(function() {
 
     $(document).click(function(e) {
         if ($(e.target).parents().filter('.press-search').length == 0) {
-            $('.press-search').removeClass('open');
+            $('html').removeClass('press-search-open');
         }
     });
 
@@ -333,92 +333,7 @@ $(document).ready(function() {
     });
 
     $('.order-press-btn a').click(function(e) {
-        $('.order-press-item').remove();
-        $('.order-press').addClass('loading').removeClass('error');
-        $('.order-press-message').hide();
-        var filterData = {'company': $('.order-company-list .order-company-item input:checked').val()};
-        if ($('.order-filter-date-from').val() != '') {
-            filterData['dateFrom'] = $('.order-filter-date-from').val();
-        }
-        if ($('.order-filter-date-to').val() != '') {
-            filterData['dateTo'] = $('.order-filter-date-to').val();
-        }
-        for (var i = 0; i < $('.order-press-filter .form-checkbox').length; i++) {
-            var curInput = $('.order-press-filter .form-checkbox').eq(i).find('input');
-            if (curInput.prop('checked')) {
-                filterData[curInput.attr('name')] = 'Y';
-            }
-        }
-        if ($('.order-press-search-window-input input').val() != '') {
-            filterData[$('.order-press-search-window-input input').attr('name')] = $('.order-press-search-window-input input').val();
-        }
-        if ($('.order-press-pager .pager a.active').length > 0) {
-            filterData['page'] = 'page-' + $('.order-press-pager .pager a.active').html();
-        }
-        $.ajax({
-            type: 'POST',
-            url: $(this).attr('href'),
-            dataType: 'json',
-            data: filterData,
-            cache: false,
-            success: function(data) {
-                if (data.status) {
-                    $('.order-press').removeClass('loading').addClass('loading-success');
-                    var newHTML = '';
-                    var inputName = $('.order-press-list').attr('data-inputname');
-                    for (var i = 0; i < data.data.list.length; i++) {
-                        var curPress = data.data.list[i];
-                        newHTML += '<div class="order-press-item"><label><input type="radio" name="' + inputName + '" value="' + curPress.ID + '" /><div class="order-press-item-inner"><div class="order-press-item-inner-wrap">';
-                        newHTML += '<div class="order-press-item-content"><div class="order-press-item-title">' + curPress.NAME + '</div>';
-                        newHTML += '<div class="order-press-item-info"><div class="order-press-item-date">' + curPress.DATE + '</div></div></div>';
-                        if (curPress.PICTURE_COUNT > 0) {
-                            newHTML += '<div class="order-press-item-media">' +
-                                            '<div class="order-press-item-media-preview" style="background-image:url(' + curPress.PICTURE_SRC + ')"></div>' +
-                                            '<div class="order-press-item-media-count">' +
-                                                '<div class="order-press-item-media-count-value">+' + curPress.PICTURE_COUNT + '</div>' +
-                                                '<div class="order-press-item-media-count-unit">фото</div>' +
-                                            '</div>' +
-                                        '</div>';
-                        }
-                        if (curPress.VIDEO_COUNT > 0) {
-                            newHTML += '<div class="order-press-item-media">' +
-                                            '<div class="order-press-item-media-preview order-press-item-media-preview-video"" style="background-image:url(' + curPress.VIDEO_SRC + ')"></div>' +
-                                            '<div class="order-press-item-media-count">' +
-                                                '<div class="order-press-item-media-count-value">+' + curPress.VIDEO_COUNT + '</div>' +
-                                                '<div class="order-press-item-media-count-unit">видео</div>' +
-                                            '</div>' +
-                                        '</div>';
-                        }
-                        newHTML += '</div></div></label></div>';
-                    }
-                    $('.order-press-list form').append(newHTML);
-                    var pagerHTML = '';
-                    if (data.data.pageCount > 1) {
-                        pagerHTML += '<div class="pager"><a href="#" class="pager-prev"></a>';
-                        var newCurPage = data.data.page.replace('page-', '');
-                        for (var i = 0; i < data.data.pageCount; i++) {
-                            var curPage = i + 1;
-                            if (curPage == newCurPage) {
-                                pagerHTML += '<a href="#" class="active">' + curPage + '</a>';
-                            } else {
-                                pagerHTML += '<a href="#">' + curPage + '</a>';
-                            }
-                        }
-                        pagerHTML += '<a href="#" class="pager-next"></a></div>';
-                    }
-                    $('.order-press-pager').html(pagerHTML);
-                } else {
-                    $('.order-press').removeClass('loading').addClass('error');
-                    $('.order-press-message').html('<div class="message message-error"><div class="message-title">Ошибка</div><div class="message-text">' + data.message + '</div></div>');
-                    $('.order-press-message').show();
-                }
-            },
-            error: function() {
-                $('.order-press').removeClass('loading').addClass('error');
-                $('.order-press-message').html('<div class="message message-error"><div class="message-title">Ошибка</div><div class="message-text">Загрузка данных невозможна</div></div>');
-                $('.order-press-message').show();
-            }
-        });
+        orderPressBtnClick();
         e.preventDefault();
     });
 
@@ -427,7 +342,7 @@ $(document).ready(function() {
             var curItem = $(this).parents().filter('.order-press-item').addClass('active');
             $('.order-press').addClass('selected');
             $('.order-type').addClass('active');
-            $('.order-type-btn a').trigger('click');
+            orderTypeBtnClick();
             $('.send-release-id').val($(this).val());
         });
     });
@@ -488,7 +403,7 @@ $(document).ready(function() {
         curForm.validate({
             ignore: '',
             submitHandler: function(form) {
-                $('.order-press-btn a').trigger('click');
+                orderPressBtnClick();
             }
         });
     });
@@ -507,8 +422,8 @@ $(document).ready(function() {
     });
 
     $('body').on('click', '.order-press-search-link', function(e) {
-        $('.order-press-search').toggleClass('open');
-        if ($('.order-press-search').hasClass('open')) {
+        $('html').toggleClass('order-press-search-open');
+        if ($('html').hasClass('order-press-search-open')) {
             $('.order-press-search-window-input input').trigger('focus');
         }
         e.preventDefault();
@@ -516,7 +431,7 @@ $(document).ready(function() {
 
     $(document).click(function(e) {
         if ($(e.target).parents().filter('.order-press-search').length == 0) {
-            $('.order-press-search').removeClass('open');
+            $('html').removeClass('order-press-search-open');
         }
     });
 
@@ -526,83 +441,14 @@ $(document).ready(function() {
             if (!(curLink.hasClass('pager-prev') && $('.order-press-pager .pager-prev').next().hasClass('active')) && !(curLink.hasClass('pager-next') && $('.order-press-pager .pager-next').prev().hasClass('active'))) {
                 $('.order-press-pager .pager a.active').removeClass('active');
                 curLink.addClass('active');
-                $('.order-press-btn a').trigger('click');
+                orderPressBtnClick();
             }
         }
         e.preventDefault();
     });
 
     $('.order-type-btn a').click(function(e) {
-        $('.order-type-item').remove();
-        $('.order-type').addClass('loading').removeClass('error');
-        $('.order-type-message').hide();
-        var filterData = {'company': $('.order-company-list .order-company-item input:checked').val()};
-        filterData['press'] = $('.order-press-list .order-press-item input:checked').val();
-        if ($('.order-type-date-from').val() != '') {
-            filterData['dateFrom'] = $('.order-type-date-from').val();
-        }
-        if ($('.order-type-date-to').val() != '') {
-            filterData['dateTo'] = $('.order-type-date-to').val();
-        }
-        for (var i = 0; i < $('.order-type-filter .form-checkbox').length; i++) {
-            var curInput = $('.order-type-filter .form-checkbox').eq(i).find('input');
-            if (curInput.prop('checked')) {
-                filterData[curInput.attr('name')] = 'Y';
-            }
-        }
-        if ($('.order-type-search-window-input input').val() != '') {
-            filterData[$('.order-type-search-window-input input').attr('name')] = $('.order-type-search-window-input input').val();
-        }
-        if ($('.order-type-pager .pager a.active').length > 0) {
-            filterData['page'] = 'page-' + $('.order-type-pager .pager a.active').html();
-        }
-        $.ajax({
-            type: 'POST',
-            url: $(this).attr('href'),
-            dataType: 'json',
-            data: filterData,
-            cache: false,
-            success: function(data) {
-                if (data.status) {
-                    $('.order-type').removeClass('loading').addClass('loading-success');
-                    var newHTML = '';
-                    var inputName = $('.order-type-list').attr('data-inputname');
-                    for (var i = 0; i < data.data.list.length; i++) {
-                        var curType = data.data.list[i];
-                        newHTML += '<div class="order-type-item"><label><input type="radio" name="' + inputName + '" value="' + curType.ID + '" /><div class="order-type-item-inner"><div class="order-type-item-inner-wrap">';
-                        newHTML += '<div class="order-type-item-logo"><img src="' + curType.PICTURE_SRC + '" alt="" /></div>';
-                        newHTML += '<div class="order-type-item-content"><div class="order-type-item-title">' + curType.NAME + '</div>';
-                        newHTML += '<div class="order-type-item-url"><a href="' + curType.URL_HREF + '">' + curType.URL + '</a></div></div>';
-                        newHTML += '</div></div></label></div>';
-                    }
-                    $('.order-type-list form').append(newHTML);
-                    var pagerHTML = '';
-                    if (data.data.pageCount > 1) {
-                        pagerHTML += '<div class="pager"><a href="#" class="pager-prev"></a>';
-                        var newCurPage = data.data.page.replace('page-', '');
-                        for (var i = 0; i < data.data.pageCount; i++) {
-                            var curPage = i + 1;
-                            if (curPage == newCurPage) {
-                                pagerHTML += '<a href="#" class="active">' + curPage + '</a>';
-                            } else {
-                                pagerHTML += '<a href="#">' + curPage + '</a>';
-                            }
-                        }
-                        pagerHTML += '<a href="#" class="pager-next"></a></div>';
-                    }
-                    $('.order-type-pager').html(pagerHTML);
-                } else {
-                    $('.order-type').removeClass('loading').addClass('error');
-                    $('.order-type-message').html('<div class="message message-error"><div class="message-title">Ошибка</div><div class="message-text">' + data.message + '</div></div>');
-                    $('.order-type-message').show();
-                }
-            },
-            error: function() {
-                $('.order-type').removeClass('loading').addClass('error');
-                $('.order-type-message').html('<div class="message message-error"><div class="message-title">Ошибка</div><div class="message-text">Загрузка данных невозможна</div></div>');
-                $('.order-type-message').show();
-            }
-        });
+        orderTypeBtnClick();
         e.preventDefault();
     });
 
@@ -654,7 +500,7 @@ $(document).ready(function() {
         curForm.validate({
             ignore: '',
             submitHandler: function(form) {
-                $('.order-type-btn a').trigger('click');
+                orderTypeBtnClick();
             }
         });
     });
@@ -673,8 +519,8 @@ $(document).ready(function() {
     });
 
     $('body').on('click', '.order-type-search-link', function(e) {
-        $('.order-type-search').toggleClass('open');
-        if ($('.order-type-search').hasClass('open')) {
+        $('html').toggleClass('order-type-search-open');
+        if ($('html').hasClass('order-type-search-open')) {
             $('.order-type-search-window-input input').trigger('focus');
         }
         e.preventDefault();
@@ -682,7 +528,7 @@ $(document).ready(function() {
 
     $(document).click(function(e) {
         if ($(e.target).parents().filter('.order-type-search').length == 0) {
-            $('.order-type-search').removeClass('open');
+            $('html').removeClass('order-type-search-open');
         }
     });
 
@@ -692,7 +538,7 @@ $(document).ready(function() {
             if (!(curLink.hasClass('pager-prev') && $('.order-type-pager .pager-prev').next().hasClass('active')) && !(curLink.hasClass('pager-next') && $('.order-type-pager .pager-next').prev().hasClass('active'))) {
                 $('.order-type-pager .pager a.active').removeClass('active');
                 curLink.addClass('active');
-                $('.order-type-btn a').trigger('click');
+                orderTypeBtnClick();
             }
         }
         e.preventDefault();
@@ -702,7 +548,7 @@ $(document).ready(function() {
         if ($(window).width() >= 1200) {
             var curDiff = $(window).width() - ($('.header-user-menu').offset().left + $('.header-user-menu').outerWidth());
             if (curDiff < 0) {
-                $('.header-user-menu').css({'margin-left': -170 + curDiff});
+                $('.header-user-menu').css({'margin-left': -140 + curDiff});
                 $('.header-user-menu-arrow').css({'margin-left': -7 - curDiff});
             }
         }
@@ -749,7 +595,196 @@ $(document).ready(function() {
         e.preventDefault();
     });
 
+    $('body').on('click', '.press-item-menu-icon', function(e) {
+        $(this).parent().parent().toggleClass('open');
+        $('header').toggleClass('press-item-menu-open');
+    });
+
+    $('body').on('click', '.press-filter-params-window-title', function(e) {
+        $(this).parent().toggleClass('open');
+    });
+
+    $('body').on('click', '.order-press-filter-params-window-title', function(e) {
+        $(this).parent().toggleClass('open');
+    });
+
+    $('body').on('click', '.order-type-filter-params-window-title', function(e) {
+        $(this).parent().toggleClass('open');
+    });
+
+    $('body').on('click', '.header-user-menu-list-company', function(e) {
+        $('.header-user-menu').addClass('header-user-menu-company-change');
+        e.preventDefault();
+    });
+
+    $('body').on('click', '.header-user-menu-company-back a', function(e) {
+        $('.header-user-menu').removeClass('header-user-menu-company-change');
+        e.preventDefault();
+    });
+
 });
+
+function orderPressBtnClick() {
+    $('.order-press-item').remove();
+    $('.order-press').addClass('loading').removeClass('error');
+    $('.order-press-message').hide();
+    var filterData = {'company': $('.order-company-list .order-company-item input:checked').val()};
+    if ($('.order-filter-date-from').val() != '') {
+        filterData['dateFrom'] = $('.order-filter-date-from').val();
+    }
+    if ($('.order-filter-date-to').val() != '') {
+        filterData['dateTo'] = $('.order-filter-date-to').val();
+    }
+    for (var i = 0; i < $('.order-press-filter .form-checkbox').length; i++) {
+        var curInput = $('.order-press-filter .form-checkbox').eq(i).find('input');
+        if (curInput.prop('checked')) {
+            filterData[curInput.attr('name')] = 'Y';
+        }
+    }
+    if ($('.order-press-search-window-input input').val() != '') {
+        filterData[$('.order-press-search-window-input input').attr('name')] = $('.order-press-search-window-input input').val();
+    }
+    if ($('.order-press-pager .pager a.active').length > 0) {
+        filterData['page'] = 'page-' + $('.order-press-pager .pager a.active').html();
+    }
+    $.ajax({
+        type: 'POST',
+        url: $('.order-press-btn a').attr('href'),
+        dataType: 'json',
+        data: filterData,
+        cache: false,
+        success: function(data) {
+            if (data.status) {
+                $('.order-press').removeClass('loading').addClass('loading-success');
+                var newHTML = '';
+                var inputName = $('.order-press-list').attr('data-inputname');
+                for (var i = 0; i < data.data.list.length; i++) {
+                    var curPress = data.data.list[i];
+                    newHTML += '<div class="order-press-item"><label><input type="radio" name="' + inputName + '" value="' + curPress.ID + '" /><div class="order-press-item-inner"><div class="order-press-item-inner-wrap">';
+                    newHTML += '<div class="order-press-item-content"><div class="order-press-item-title">' + curPress.NAME + '</div>';
+                    newHTML += '<div class="order-press-item-info"><div class="order-press-item-date">' + curPress.DATE + '</div></div></div>';
+                    if (curPress.PICTURE_COUNT > 0) {
+                        newHTML += '<div class="order-press-item-media">' +
+                                        '<div class="order-press-item-media-preview" style="background-image:url(' + curPress.PICTURE_SRC + ')"></div>' +
+                                        '<div class="order-press-item-media-count">' +
+                                            '<div class="order-press-item-media-count-value">+' + curPress.PICTURE_COUNT + '</div>' +
+                                            '<div class="order-press-item-media-count-unit">фото</div>' +
+                                        '</div>' +
+                                    '</div>';
+                    }
+                    if (curPress.VIDEO_COUNT > 0) {
+                        newHTML += '<div class="order-press-item-media">' +
+                                        '<div class="order-press-item-media-preview order-press-item-media-preview-video"" style="background-image:url(' + curPress.VIDEO_SRC + ')"></div>' +
+                                        '<div class="order-press-item-media-count">' +
+                                            '<div class="order-press-item-media-count-value">+' + curPress.VIDEO_COUNT + '</div>' +
+                                            '<div class="order-press-item-media-count-unit">видео</div>' +
+                                        '</div>' +
+                                    '</div>';
+                    }
+                    newHTML += '</div></div></label></div>';
+                }
+                $('.order-press-list form').append(newHTML);
+                var pagerHTML = '';
+                if (data.data.pageCount > 1) {
+                    pagerHTML += '<div class="pager"><a href="#" class="pager-prev"></a>';
+                    var newCurPage = data.data.page.replace('page-', '');
+                    for (var i = 0; i < data.data.pageCount; i++) {
+                        var curPage = i + 1;
+                        if (curPage == newCurPage) {
+                            pagerHTML += '<a href="#" class="active">' + curPage + '</a>';
+                        } else {
+                            pagerHTML += '<a href="#">' + curPage + '</a>';
+                        }
+                    }
+                    pagerHTML += '<a href="#" class="pager-next"></a></div>';
+                }
+                $('.order-press-pager').html(pagerHTML);
+            } else {
+                $('.order-press').removeClass('loading').addClass('error');
+                $('.order-press-message').html('<div class="message message-error"><div class="message-title">Ошибка</div><div class="message-text">' + data.message + '</div></div>');
+                $('.order-press-message').show();
+            }
+        },
+        error: function() {
+            $('.order-press').removeClass('loading').addClass('error');
+            $('.order-press-message').html('<div class="message message-error"><div class="message-title">Ошибка</div><div class="message-text">Загрузка данных невозможна</div></div>');
+            $('.order-press-message').show();
+        }
+    });
+}
+
+function orderTypeBtnClick() {
+    $('.order-type-item').remove();
+    $('.order-type').addClass('loading').removeClass('error');
+    $('.order-type-message').hide();
+    var filterData = {'company': $('.order-company-list .order-company-item input:checked').val()};
+    filterData['press'] = $('.order-press-list .order-press-item input:checked').val();
+    if ($('.order-type-date-from').val() != '') {
+        filterData['dateFrom'] = $('.order-type-date-from').val();
+    }
+    if ($('.order-type-date-to').val() != '') {
+        filterData['dateTo'] = $('.order-type-date-to').val();
+    }
+    for (var i = 0; i < $('.order-type-filter .form-checkbox').length; i++) {
+        var curInput = $('.order-type-filter .form-checkbox').eq(i).find('input');
+        if (curInput.prop('checked')) {
+            filterData[curInput.attr('name')] = 'Y';
+        }
+    }
+    if ($('.order-type-search-window-input input').val() != '') {
+        filterData[$('.order-type-search-window-input input').attr('name')] = $('.order-type-search-window-input input').val();
+    }
+    if ($('.order-type-pager .pager a.active').length > 0) {
+        filterData['page'] = 'page-' + $('.order-type-pager .pager a.active').html();
+    }
+    $.ajax({
+        type: 'POST',
+        url: $('.order-type-btn a').attr('href'),
+        dataType: 'json',
+        data: filterData,
+        cache: false,
+        success: function(data) {
+            if (data.status) {
+                $('.order-type').removeClass('loading').addClass('loading-success');
+                var newHTML = '';
+                var inputName = $('.order-type-list').attr('data-inputname');
+                for (var i = 0; i < data.data.list.length; i++) {
+                    var curType = data.data.list[i];
+                    newHTML += '<div class="order-type-item"><label><input type="radio" name="' + inputName + '" value="' + curType.ID + '" /><div class="order-type-item-inner"><div class="order-type-item-inner-wrap">';
+                    newHTML += '<div class="order-type-item-logo"><img src="' + curType.PICTURE_SRC + '" alt="" /></div>';
+                    newHTML += '<div class="order-type-item-content"><div class="order-type-item-title">' + curType.NAME + '</div>';
+                    newHTML += '<div class="order-type-item-url"><a href="' + curType.URL_HREF + '">' + curType.URL + '</a></div></div>';
+                    newHTML += '</div></div></label></div>';
+                }
+                $('.order-type-list form').append(newHTML);
+                var pagerHTML = '';
+                if (data.data.pageCount > 1) {
+                    pagerHTML += '<div class="pager"><a href="#" class="pager-prev"></a>';
+                    var newCurPage = data.data.page.replace('page-', '');
+                    for (var i = 0; i < data.data.pageCount; i++) {
+                        var curPage = i + 1;
+                        if (curPage == newCurPage) {
+                            pagerHTML += '<a href="#" class="active">' + curPage + '</a>';
+                        } else {
+                            pagerHTML += '<a href="#">' + curPage + '</a>';
+                        }
+                    }
+                    pagerHTML += '<a href="#" class="pager-next"></a></div>';
+                }
+                $('.order-type-pager').html(pagerHTML);
+            } else {
+                $('.order-type').removeClass('loading').addClass('error');
+                $('.order-type-message').html('<div class="message message-error"><div class="message-title">Ошибка</div><div class="message-text">' + data.message + '</div></div>');
+                $('.order-type-message').show();
+            }
+        },
+        error: function() {
+            $('.order-type').removeClass('loading').addClass('error');
+            $('.order-type-message').html('<div class="message message-error"><div class="message-title">Ошибка</div><div class="message-text">Загрузка данных невозможна</div></div>');
+            $('.order-type-message').show();
+        }
+    });
+}
 
 function orderFilterUpdate() {
     var newHTML = '';
@@ -774,8 +809,11 @@ function orderFilterUpdate() {
         if (datesText != '') {
             newHTML += '<div class="order-press-filter-param">' + datesText + '<span data-id="' + id + '"><svg width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L4.5 4.5L8 1" stroke-width="1.2"/><path d="M8 8L4.5 4.5L1 8" stroke-width="1.2"/></svg></span></div>';
         }
+        $('.order-press-filter-params-window-dates .order-press-filter-params-window-title .order-press-filter-params-window-title-values').remove();
+        $('.order-press-filter-params-window-dates .order-press-filter-params-window-title').append('<div class="order-press-filter-params-window-title-values">' + datesText + '</div>');
     }
 
+    var newText = '';
     for (var i = 0; i < $('.order-press-filter .form-checkbox').length; i++) {
         var curInput = $('.order-press-filter .form-checkbox').eq(i).find('input');
         id++;
@@ -783,8 +821,13 @@ function orderFilterUpdate() {
         if (curInput.prop('checked')) {
             newHTML += '<div class="order-press-filter-param">' + curInput.parent().find('span').text() + '<span data-id="' + id + '"><svg width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L4.5 4.5L8 1" stroke-width="1.2"/><path d="M8 8L4.5 4.5L1 8" stroke-width="1.2"/></svg></span></div>';
             countFilters++;
+            if (newText != '') {
+                newText += ', ';
+            }
         }
     }
+    $('.order-press-filter-params-window-props .order-press-filter-params-window-title .order-press-filter-params-window-title-values').remove();
+    $('.order-press-filter-params-window-props .order-press-filter-params-window-title').append('<div class="order-press-filter-params-window-title-values">' + newText + '</div>');
 
     if (countFilters == 0) {
         $('.order-press-filter-link span').remove();
@@ -795,7 +838,7 @@ function orderFilterUpdate() {
 
     $('.order-press-filter-params').html(newHTML);
 
-    $('.order-press-btn a').trigger('click');
+    orderPressBtnClick();
 }
 
 function orderFilterTypeUpdate() {
@@ -821,8 +864,11 @@ function orderFilterTypeUpdate() {
         if (datesText != '') {
             newHTML += '<div class="order-type-filter-param">' + datesText + '<span data-id="' + id + '"><svg width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L4.5 4.5L8 1" stroke-width="1.2"/><path d="M8 8L4.5 4.5L1 8" stroke-width="1.2"/></svg></span></div>';
         }
+        $('.order-type-filter-params-window-dates .order-type-filter-params-window-title .order-type-filter-params-window-title-values').remove();
+        $('.order-type-filter-params-window-dates .order-type-filter-params-window-title').append('<div class="order-type-filter-params-window-title-values">' + datesText + '</div>');
     }
 
+    var newText = '';
     for (var i = 0; i < $('.order-type-filter .form-checkbox').length; i++) {
         var curInput = $('.order-type-filter .form-checkbox').eq(i).find('input');
         id++;
@@ -830,8 +876,14 @@ function orderFilterTypeUpdate() {
         if (curInput.prop('checked')) {
             newHTML += '<div class="order-type-filter-param">' + curInput.parent().find('span').text() + '<span data-id="' + id + '"><svg width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L4.5 4.5L8 1" stroke-width="1.2"/><path d="M8 8L4.5 4.5L1 8" stroke-width="1.2"/></svg></span></div>';
             countFilters++;
+            if (newText != '') {
+                newText += ', ';
+            }
+            newText += curInput.parent().find('span').text();
         }
     }
+    $('.order-type-filter-params-window-props .order-type-filter-params-window-title .order-type-filter-params-window-title-values').remove();
+    $('.order-type-filter-params-window-props .order-type-filter-params-window-title').append('<div class="order-type-filter-params-window-title-values">' + newText + '</div>');
 
     if (countFilters == 0) {
         $('.order-type-filter-link span').remove();
@@ -842,7 +894,7 @@ function orderFilterTypeUpdate() {
 
     $('.order-type-filter-params').html(newHTML);
 
-    $('.order-type-btn a').trigger('click');
+    orderTypeBtnClick();
 }
 
 function filterUpdate() {
@@ -865,16 +917,25 @@ function filterUpdate() {
         if (datesText != '') {
             newHTML += '<div class="press-filter-param">' + datesText + '<span data-id="' + id + '"><svg width="7" height="7" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L4.5 4.5L8 1" stroke-width="1.2"/><path d="M8 8L4.5 4.5L1 8" stroke-width="1.2"/></svg></span></div>';
         }
+        $('.press-filter-params-window-dates .press-filter-params-window-title .press-filter-params-window-title-values').remove();
+        $('.press-filter-params-window-dates .press-filter-params-window-title').append('<div class="press-filter-params-window-title-values">' + datesText + '</div>');
     }
 
+    var newText = '';
     for (var i = 0; i < $('.press-filter .form-checkbox').length; i++) {
         var curInput = $('.press-filter .form-checkbox').eq(i).find('input');
         id++;
         curInput.attr('data-id', id);
         if (curInput.prop('checked')) {
             newHTML += '<div class="press-filter-param">' + curInput.parent().find('span').text() + '<span data-id="' + id + '"><svg width="7" height="7" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L4.5 4.5L8 1" stroke-width="1.2"/><path d="M8 8L4.5 4.5L1 8" stroke-width="1.2"/></svg></span></div>';
+            if (newText != '') {
+                newText += ', ';
+            }
+            newText += curInput.parent().find('span').text();
         }
     }
+    $('.press-filter-params-window-props .press-filter-params-window-title .press-filter-params-window-title-values').remove();
+    $('.press-filter-params-window-props .press-filter-params-window-title').append('<div class="press-filter-params-window-title-values">' + newText + '</div>');
 
     $('.press-filter-params').html(newHTML);
 
@@ -979,11 +1040,18 @@ function initForm(curForm) {
                 startDate = new Date(Number(startDateArray[2]), Number(startDateArray[1]) - 1 , Number(startDateArray[0]));
             }
         }
+        var datepickerPosition = 'bottom left';
+        if ($(this).parents().filter('.press-filter-params-window-date').length == 1 && $(this).parents().filter('.press-filter-params-window-date').prev().hasClass('press-filter-params-window-date')) {
+            if ($(window).width() < 1199) {
+                datepickerPosition = 'bottom right';
+            }
+        }
         $(this).datepicker({
             language: 'ru',
             minDate: minDate,
             maxDate: maxDate,
             startDate: startDate,
+            position: datepickerPosition,
             toggleSelected: false
         });
         if (typeof ($(this).attr('value')) != 'undefined') {
